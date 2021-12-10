@@ -3,6 +3,8 @@
 This project demonstrates how to create a Shell Icon Handler, that is loaded by *Explorer.exe*. An icon handler can show different icons for the same file type based on some logic.
 This implementation shows different icons for 64-bit and 32-bit DLLs.
 
+(This project is used as one of the exercises in my ![COM Programming class](https://github.com/zodiacon/syllabi/blob/main/COMProgramming-3days.pdf).
+
 ## Registration
 
 The DLL is loaded and used by Explorer.exe. To register it for all users, open an elevated command window, navigate to the directory where `DllIconHandler.dll` is located and enter the following:
