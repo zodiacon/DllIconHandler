@@ -19,7 +19,7 @@ To register for the current user only, open a normal command window, navigate to
 regsvr32 /n /i:user DllIconhandler.dll
 ```
 
-You may need to restart explorer for the DLL to take effect. If you open a new explorer window that maight work as well.
+You may need to restart explorer for the DLL to take effect. If you open a new explorer window that might work as well.
 
 You can test it by opening an explorer window and navigating to `c:\Windows\System32` and then contrast that with `c:\windows\SysWow64`.
 
