@@ -2,7 +2,6 @@
 
 
 #include "pch.h"
-#include "framework.h"
 #include "resource.h"
 #include "DllIconHandler_i.h"
 #include "dllmain.h"

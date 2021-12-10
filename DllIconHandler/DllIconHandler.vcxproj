@@ -224,7 +224,6 @@
   <ItemGroup>
     <ClInclude Include="DllIconHandler_i.h" />
     <ClInclude Include="dllmain.h" />
-    <ClInclude Include="framework.h" />
     <ClInclude Include="IconHandler.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
@@ -275,9 +274,6 @@
     <None Include="DllIconHandler.def" />
     <None Include="DllIconHandler.rgs" />
     <None Include="IconHandler.rgs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="DllIconHandler.idl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Icons\Dll32.ico" />

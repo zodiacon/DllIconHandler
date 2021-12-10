@@ -19,9 +19,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -73,11 +70,6 @@
     <None Include="IconHandler.rgs">
       <Filter>Resource Files</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Midl Include="DllIconHandler.idl">
-      <Filter>Source Files</Filter>
-    </Midl>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Icons\Dll32.ico">
