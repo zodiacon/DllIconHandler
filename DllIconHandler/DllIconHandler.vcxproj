@@ -280,6 +280,9 @@
     <Image Include="Icons\Dll32.ico" />
     <Image Include="Icons\Dll64.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Midl Include="DllIconHandler.idl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
