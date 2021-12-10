@@ -22,3 +22,7 @@ regsvr32 /n /i:user DllIconhandler.dll
 You may need to restart explorer for the DLL to take effect. If you open a new explorer window that maight work as well.
 
 You can test it by opening an explorer window and navigating to `c:\Windows\System32` and then contrast that with `c:\windows\SysWow64`.
+
+## Building from source
+
+Open the solution file in Visual Studio 2022 and just build. You can also use an older Visual Studio version - just change the project's properties to use the toolset that you have installed.
