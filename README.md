@@ -7,7 +7,7 @@ This implementation shows different icons for 64-bit and 32-bit DLLs.
 
 ## Registration
 
-The DLL is loaded and used by Explorer.exe. To register it for all users, open an elevated command window, navigate to the directory where `DllIconHandler.dll` is located and enter the following:
+The DLL is loaded and used by Explorer.exe. It must be properly registered, as it's as COM DLL and as a shell icon handler. To register it for all users, open an elevated command window, navigate to the directory where `DllIconHandler.dll` is located and enter the following:
 
 ```cmd
 regsvr32 DlliconHandler.dll
