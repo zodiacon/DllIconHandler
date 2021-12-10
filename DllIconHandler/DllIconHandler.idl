@@ -1,0 +1,31 @@
+// DllIconHandler.idl : IDL source for DllIconHandler
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (DllIconHandler.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+//[
+//	object,
+//	uuid(2d6a2331-a2a2-4e6f-acb6-01143af75404),
+//	pointer_default(unique)
+//]
+//interface IIconHandler : IUnknown {
+//};
+[
+	uuid(a1b4516d-9340-444b-87e2-13317a44eeb1),
+	version(1.0),
+]
+library DllIconHandlerLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(d913f592-08f1-418a-9428-cc33db97ed60)
+	]
+	coclass IconHandler {
+		//[default] interface IIconHandler;
+	};
+};
+
