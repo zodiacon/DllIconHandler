@@ -10,18 +10,28 @@
 
 CIconHandler::ModuleBitness CIconHandler::GetModuleBitness(PCWSTR path) {
     auto bitness = ModuleBitness::Unknown;
-    auto hFile = ::CreateFile(path, GENERIC_READ, FILE_SHARE_READ, nullptr, OPEN_EXISTING, 0, nullptr);
+    //
+    // open the DLL as a data file
+    //
+    auto hFile = ::CreateFile(path, GENERIC_READ, FILE_SHARE_READ, 
+        nullptr, OPEN_EXISTING, 0, nullptr);
     if (hFile == INVALID_HANDLE_VALUE)
         return bitness;
 
+    //
+    // create a memory mapped file to read the PE header
+    //
     auto hMemMap = ::CreateFileMapping(hFile, nullptr, PAGE_READONLY, 0, 0, nullptr);
     ::CloseHandle(hFile);
     if (!hMemMap)
         return bitness;
 
+    //
+    // map the first page (where the header is located)
+    //
     auto p = MapViewOfFile(hMemMap, FILE_MAP_READ, 0, 0, 1 << 12);
     if (p) {
-        auto header = ImageNtHeader(p);
+        auto header = ::ImageNtHeader(p);
         if (header) {
             auto machine = header->FileHeader.Machine;
             bitness = header->Signature == IMAGE_NT_OPTIONAL_HDR64_MAGIC ||
@@ -37,7 +47,8 @@ CIconHandler::ModuleBitness CIconHandler::GetModuleBitness(PCWSTR path) {
 
 HRESULT __stdcall CIconHandler::GetIconLocation(UINT uFlags, PWSTR pszIconFile, UINT cchMax, int* piIndex, UINT* pwFlags) {
     if (s_ModulePath[0] == 0) {
-        ::GetModuleFileName(_AtlBaseModule.GetModuleInstance(), s_ModulePath, _countof(s_ModulePath));
+        ::GetModuleFileName(_AtlBaseModule.GetModuleInstance(), 
+            s_ModulePath, _countof(s_ModulePath));
         ATLTRACE(L"Module path: %s\n", s_ModulePath);
     }
     if (s_ModulePath[0] == 0)
@@ -46,8 +57,9 @@ HRESULT __stdcall CIconHandler::GetIconLocation(UINT uFlags, PWSTR pszIconFile, 
     if (m_Bitness == ModuleBitness::Unknown)
         return S_FALSE;
 
-    wcscpy_s(pszIconFile, wcslen(s_ModulePath) + 1, s_ModulePath);
-    ATLTRACE(L"CIconHandler::GetIconLocation: %s bitness: %d\n", pszIconFile, m_Bitness);
+    wcscpy_s(pszIconFile, std::min((UINT)wcslen(s_ModulePath) + 1, cchMax), s_ModulePath);
+    ATLTRACE(L"CIconHandler::GetIconLocation: %s bitness: %d\n", 
+        pszIconFile, m_Bitness);
     *piIndex = m_Bitness == ModuleBitness::Bit32 ? 0 : 1;
     *pwFlags = GIL_PERINSTANCE;
 

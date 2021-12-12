@@ -11,6 +11,8 @@
 #define STRICT
 #endif
 
+#define NOMINMAX
+
 #include "targetver.h"
 
 #define _ATL_APARTMENT_THREADED
@@ -27,5 +29,6 @@
 #include <atlcom.h>
 #include <atlctl.h>
 #include <atlstr.h>
+#include <utility>
 
 #endif //PCH_H

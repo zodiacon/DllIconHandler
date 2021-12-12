@@ -21,10 +21,10 @@ interface IIconHandler : IUnknown {
 library DllIconHandlerLib
 {
 	importlib("stdole2.tlb");
-	[
-		uuid(d913f592-08f1-418a-9428-cc33db97ed60)
-	]
-	coclass IconHandler {
+[
+	uuid(d913f592-08f1-418a-9428-cc33db97ed60)
+]
+coclass IconHandler {
 		[default] interface IIconHandler;
 	};
 };
