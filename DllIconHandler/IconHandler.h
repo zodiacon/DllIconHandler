@@ -10,17 +10,14 @@ using namespace ATL;
 
 // CIconHandler
 
-class ATL_NO_VTABLE CIconHandler :
+class ATL_NO_VTABLE CIconHandler abstract :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CIconHandler, &CLSID_IconHandler>,
 	public IExtractIcon,
 	public IPersistFile {
 public:
-	CIconHandler() {
-	}
 
 	DECLARE_REGISTRY_RESOURCEID(IDR_ICONHANDLER)
-
 
 	BEGIN_COM_MAP(CIconHandler)
 		COM_INTERFACE_ENTRY(IPersistFile)
@@ -56,7 +53,7 @@ private:
 	HRESULT __stdcall SaveCompleted(LPCOLESTR pszFileName) override;
 	HRESULT __stdcall GetCurFile(LPOLESTR* ppszFileName) override;
 
-	ModuleBitness m_Bitness;
+	ModuleBitness m_Bitness{ ModuleBitness::Unknown };
 	inline static WCHAR s_ModulePath[MAX_PATH]{};
 };
 

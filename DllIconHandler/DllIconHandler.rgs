@@ -1,9 +1,6 @@
-HKCR
-{
-	NoRemove DllFile
-	{
-		NoRemove ShellEx
-		{
+HKCR {
+	NoRemove DllFile {
+		NoRemove ShellEx {
 			IconHandler = s '{d913f592-08f1-418a-9428-cc33db97ed60}'
 		}
 	}

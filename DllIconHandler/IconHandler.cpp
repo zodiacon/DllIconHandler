@@ -29,14 +29,11 @@ CIconHandler::ModuleBitness CIconHandler::GetModuleBitness(PCWSTR path) {
     //
     // map the first page (where the header is located)
     //
-    auto p = MapViewOfFile(hMemMap, FILE_MAP_READ, 0, 0, 1 << 12);
+    auto p = ::MapViewOfFile(hMemMap, FILE_MAP_READ, 0, 0, 1 << 12);
     if (p) {
         auto header = ::ImageNtHeader(p);
         if (header) {
-            auto machine = header->FileHeader.Machine;
-            bitness = header->Signature == IMAGE_NT_OPTIONAL_HDR64_MAGIC ||
-                machine == IMAGE_FILE_MACHINE_AMD64 || machine == IMAGE_FILE_MACHINE_ARM64 ?
-                ModuleBitness::Bit64 : ModuleBitness::Bit32;
+            bitness = header->OptionalHeader.Magic == IMAGE_NT_OPTIONAL_HDR64_MAGIC ? ModuleBitness::Bit64 : ModuleBitness::Bit32;
         }
         ::UnmapViewOfFile(p);
     }
@@ -47,7 +44,7 @@ CIconHandler::ModuleBitness CIconHandler::GetModuleBitness(PCWSTR path) {
 
 HRESULT __stdcall CIconHandler::GetIconLocation(UINT uFlags, PWSTR pszIconFile, UINT cchMax, int* piIndex, UINT* pwFlags) {
     if (s_ModulePath[0] == 0) {
-        ::GetModuleFileName(_AtlBaseModule.GetModuleInstance(), 
+        ::GetModuleFileName(_pModule->GetModuleInstance(), 
             s_ModulePath, _countof(s_ModulePath));
         ATLTRACE(L"Module path: %s\n", s_ModulePath);
     }
